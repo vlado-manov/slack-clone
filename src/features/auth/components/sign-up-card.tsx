@@ -24,7 +24,9 @@ export const SignUpCard = ({ setState }: SignUpCardProps) => {
   const [password, setPassword] = useState<string>("");
   const [confirmPassword, setConfirmPassword] = useState<string>("");
   const { signIn } = useAuthActions();
-
+  const onProviderSignUp = (value: "github" | "google") => {
+    signIn(value);
+  };
   return (
     <Card className="w-full h-full p-8">
       <CardHeader className="px-0 pt-0">
@@ -67,7 +69,7 @@ export const SignUpCard = ({ setState }: SignUpCardProps) => {
         <div className="flex flex-col gap-y-2.5">
           <Button
             disabled={false}
-            onClick={() => {}}
+            onClick={() => onProviderSignUp("google")}
             variant="outline"
             size="lg"
             className="w-full relative"
@@ -77,7 +79,7 @@ export const SignUpCard = ({ setState }: SignUpCardProps) => {
           </Button>
           <Button
             disabled={false}
-            onClick={() => void signIn("github")}
+            onClick={() => onProviderSignUp("github")}
             variant="outline"
             size="lg"
             className="w-full relative"
