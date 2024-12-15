@@ -1,4 +1,6 @@
 import { useState } from "react";
+import { useAuthActions } from "@convex-dev/auth/react";
+
 import { Button } from "@/components/ui/button";
 import {
   Card,
@@ -21,6 +23,8 @@ export const SignUpCard = ({ setState }: SignUpCardProps) => {
   const [email, setEmail] = useState<string>("");
   const [password, setPassword] = useState<string>("");
   const [confirmPassword, setConfirmPassword] = useState<string>("");
+  const { signIn } = useAuthActions();
+
   return (
     <Card className="w-full h-full p-8">
       <CardHeader className="px-0 pt-0">
@@ -73,7 +77,7 @@ export const SignUpCard = ({ setState }: SignUpCardProps) => {
           </Button>
           <Button
             disabled={false}
-            onClick={() => {}}
+            onClick={() => void signIn("github")}
             variant="outline"
             size="lg"
             className="w-full relative"
