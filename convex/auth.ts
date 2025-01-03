@@ -9,11 +9,28 @@ const CustomPassword = Password<DataModel>({
     return {
       email: params.email as string,
       name: params.name as string,
-      // role: params.role as string,
     };
   },
 });
 
 export const { auth, signIn, signOut, store } = convexAuth({
-  providers: [CustomPassword, GitHub, Google],
+  providers: [
+    CustomPassword,
+    GitHub({
+      authorization: {
+        url: "https://github.com/login/oauth/authorize",
+        params: {
+          prompt: "consent",
+        },
+      },
+    }),
+    Google({
+      authorization: {
+        url: "https://accounts.google.com/o/oauth2/auth",
+        params: {
+          prompt: "select_account",
+        },
+      },
+    }),
+  ],
 });
